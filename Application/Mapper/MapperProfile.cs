@@ -18,6 +18,7 @@ namespace Application.Mapper
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => "Employee"));
             CreateMap<TicketDto, Ticket>().ReverseMap();
             CreateMap<CommentDto, Comment>().ReverseMap();
+            CreateMap<ProjectDto, Project>().ReverseMap();
 
         }
     }

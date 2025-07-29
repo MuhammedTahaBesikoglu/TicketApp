@@ -20,8 +20,12 @@ namespace Domain.Entities
         public DateTime? ClosedAt { get; set; }
 
         public ICollection<Comment> TicketComments { get; set; } = new List<Comment>();
+
         public int UserId { get; set; }
-        public User User { get; set; } 
+        public int ProjectId { get; set; }
+        public Project? Project { get; set; }
+        public User? User { get; set; }
+
 
     }
 

@@ -16,6 +16,7 @@ using System.Reflection;
 using Domain.Repository.Base;
 using Application.Mapper;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore.Internal;
 
 
 
@@ -24,7 +25,8 @@ var builder = WebApplication.CreateBuilder(args);
 //Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 
@@ -33,7 +35,8 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped(typeof(IRepository<>) , typeof(Repository<>));
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+
 
 //Helpers
 builder.Services.AddScoped<IPasswordHasher, PasswordHasherService>();
@@ -44,7 +47,6 @@ builder.Services.AddAutoMapper(c => c.AddProfile<MapperProfile>());
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
